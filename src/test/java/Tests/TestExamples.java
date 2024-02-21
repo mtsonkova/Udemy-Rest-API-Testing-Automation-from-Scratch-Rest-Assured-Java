@@ -59,7 +59,7 @@ public class TestExamples {
         when()
                 .post("/users").
         then()
-                .statusCode(201);
+                .statusCode(201).log().all();
     }
 
     @Test
@@ -76,7 +76,7 @@ public class TestExamples {
                 when()
                 .put("/users/2").
                 then()
-                .statusCode(200);
+                .statusCode(200).log().all();
     }
 
     @Test
@@ -93,7 +93,7 @@ public class TestExamples {
                 when()
                 .patch("/users/2").
                 then()
-                .statusCode(200);
+                .statusCode(200).log().all();
     }
 
     @Test
@@ -110,7 +110,7 @@ public class TestExamples {
                 when()
                 .delete("/users/2").
                 then()
-                .statusCode(204);
+                .statusCode(204).log().all();
     }
 
 }
