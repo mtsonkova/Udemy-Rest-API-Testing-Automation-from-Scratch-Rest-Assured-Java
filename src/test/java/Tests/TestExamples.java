@@ -62,4 +62,55 @@ public class TestExamples {
                 .statusCode(201);
     }
 
+    @Test
+    public void testPUT() {
+        baseURI = base;
+
+        JSONObject request = new JSONObject();
+        request.put("name", "Morpheus");
+        request.put("job", "leader of Zion");
+
+        given().
+                contentType(ContentType.JSON)
+                .body(request.toJSONString()).
+                when()
+                .put("/users/2").
+                then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void testPATCH() {
+        baseURI = base;
+
+        JSONObject request = new JSONObject();
+        request.put("name", "THe Great Morpheus");
+        request.put("job", "Supreme leader of Zion and defender of all Humanity");
+
+        given().
+                contentType(ContentType.JSON)
+                .body(request.toJSONString()).
+                when()
+                .patch("/users/2").
+                then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void testDELETE() {
+        baseURI = base;
+
+        JSONObject request = new JSONObject();
+        request.put("name", "The Great Morpheus");
+        request.put("job", "Supreme leader of Zion and defender of all Humanity");
+
+        given().
+                contentType(ContentType.JSON)
+                .body(request.toJSONString()).
+                when()
+                .delete("/users/2").
+                then()
+                .statusCode(204);
+    }
+
 }
