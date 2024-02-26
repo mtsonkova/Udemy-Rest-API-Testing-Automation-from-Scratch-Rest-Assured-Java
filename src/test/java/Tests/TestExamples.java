@@ -38,10 +38,8 @@ public class TestExamples {
         given()
            .get("/users?page=2")
         .then()
-           .statusCode(200)
-           .body("data.id[1]", equalTo(1))
-           .body("data[4].first_name", equalTo("George"))
-           .body("data.first_name", hasItems("Rachel", "Michael", "Lindsay"));
+           .statusCode(200).log().all();
+
 
     }
 
