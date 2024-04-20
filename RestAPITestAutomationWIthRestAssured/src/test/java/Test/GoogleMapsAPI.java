@@ -2,6 +2,7 @@ package Test;
 
 import Files.payload;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -36,7 +37,18 @@ public class GoogleMapsAPI {
                 .header("Server", equalTo("Apache/2.4.52 (Ubuntu)"))
                 .extract().response().asString();
 
-        System.out.println(response);
+
+        JsonPath jsonPath = new JsonPath(response); // class that helps to parse JSON
+
+        String placeId = jsonPath.getString("place_id");
+
+        System.out.println(placeId);
+
+        given().log().all().queryParam("key", "qaclick123")
+                .header("Content-Type", "application/json")
+                .body(payload.updatePlace())
+                .when().put("api/place/update/json")
+                .then().assertThat().statusCode(200);
     }
 
 
