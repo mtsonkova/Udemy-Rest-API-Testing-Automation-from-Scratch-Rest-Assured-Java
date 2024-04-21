@@ -20,14 +20,18 @@ public class payload {
                 "}";
     }
 
-    public static String updatePlace() {
+    public static String updatePlace(String placeId) {
         return "{\n" +
-                "\"place_id\":\"2e2f88291e903ae9ff4168ba22142e10\",\n" +
+        "\"place_id\":\"" + placeId + "\",\r\n" +
                 "\"address\":\"70 winter walk, USA\",\n" +
                 "\"key\":\"qaclick123\"\n" +
-                "}\n";
+                "}";
     }
 
-
+    public static String deletePlace(String placeId) {
+        return "{\n" +
+                "    \"place_id\":\"" + placeId +"\"\n" +
+                "}";
+    }
 }
 

@@ -2,11 +2,13 @@ package Test;
 
 import Files.payload;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
+import static io.restassured.config.EncoderConfig.encoderConfig;
 import static org.hamcrest.Matchers.*;
 
 
@@ -26,7 +28,7 @@ public class GoogleMapsAPI {
 
     @Test
     public void testAddNewLocation() {
-        String response = given().log().all().queryParam("key", "qaclick123")
+        String response = given().queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
                 .body(payload.AddPlace())
                 .when().post("maps/api/place/add/json")
@@ -44,11 +46,40 @@ public class GoogleMapsAPI {
 
         System.out.println(placeId);
 
-        given().log().all().queryParam("key", "qaclick123")
+        //get newly added place
+
+        String getResponse = given().queryParam("place_id", placeId)
+                .queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
-                .body(payload.updatePlace())
-                .when().put("api/place/update/json")
-                .then().assertThat().statusCode(200);
+                .when().get("/maps/api/place/get/json")
+                        .then().assertThat().log().all().statusCode(200)
+                .extract().response().asString();
+
+
+        //update place
+        given().log().all().queryParam("key", "qaclick123")
+                .queryParam("place_id", placeId)
+                .header("Content-Type", "application/json")
+                .body(payload.updatePlace(placeId))
+                .when().put("maps/api/place/update/json")
+                .then().assertThat().log().all().statusCode(200).body("msg", equalTo("Address successfully updated"));
+
+
+        //get updated place
+        given().queryParam("place_id", placeId)
+                .queryParam("key", "qaclick123")
+                .header("Content-Type", "application/json")
+                .when().get("/maps/api/place/get/json")
+                .then().assertThat().log().all().statusCode(200)
+                .extract().response().asString();
+
+        // delete place by given place id
+
+        given().queryParam("key", "qaclick123")
+                .header("Content-Type", "application/json")
+                .body(payload.deletePlace(placeId))
+                .when().post("/maps/api/place/delete/json")
+                .then().assertThat().log().all().statusCode(200);
     }
 
 
