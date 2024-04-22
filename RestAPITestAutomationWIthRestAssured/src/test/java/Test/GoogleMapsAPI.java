@@ -1,9 +1,11 @@
 package Test;
 
+import Files.ReusableMethods;
 import Files.payload;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,7 +42,7 @@ public class GoogleMapsAPI {
                 .extract().response().asString();
 
 
-        JsonPath jsonPath = new JsonPath(response); // class that helps to parse JSON
+        JsonPath jsonPath = ReusableMethods.rawToJSON(response); // class that helps to parse JSON
 
         String placeId = jsonPath.getString("place_id");
 
@@ -66,13 +68,16 @@ public class GoogleMapsAPI {
 
 
         //get updated place
-        given().queryParam("place_id", placeId)
+        String updatedPlaceInfo = given().queryParam("place_id", placeId)
                 .queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
                 .when().get("/maps/api/place/get/json")
                 .then().assertThat().log().all().statusCode(200)
                 .extract().response().asString();
 
+        JsonPath json = ReusableMethods.rawToJSON(updatedPlaceInfo);
+        String address = json.getString("address");
+        Assert.assertEquals(address, "70 winter walk, USA");
         // delete place by given place id
 
         given().queryParam("key", "qaclick123")
