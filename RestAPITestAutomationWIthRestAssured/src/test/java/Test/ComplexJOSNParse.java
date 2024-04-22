@@ -69,4 +69,20 @@ public class ComplexJOSNParse {
         }
         Assert.assertEquals(numOfCopies, 10);
     }
+
+    //6. Verify if Sum of all Course prices matches with Purchase Amount
+    @Test
+    public void verifyIdSumOfAllCoursePricesEqualsPurchaseAmount() {
+        int purchaseAmount = jpath.getInt("dashboard.purchaseAmount");
+        int sumOfAllPurchasedCoursesPrice = 0;
+        int numOfCourses = jpath.getInt("courses.size()");
+
+        for (int i = 0; i < numOfCourses; i++) {
+            int currentCourseCopies = jpath.getInt("courses[" + i + "].copies");
+            int currentCoursePrice = jpath.getInt("courses[" + i + "].price");
+
+            sumOfAllPurchasedCoursesPrice += (currentCoursePrice * currentCourseCopies);
+        }
+        Assert.assertEquals(sumOfAllPurchasedCoursesPrice, purchaseAmount);
+    }
 }
