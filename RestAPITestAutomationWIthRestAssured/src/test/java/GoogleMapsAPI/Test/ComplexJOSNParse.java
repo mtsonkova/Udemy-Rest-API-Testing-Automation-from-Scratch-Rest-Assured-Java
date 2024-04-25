@@ -1,10 +1,10 @@
-package GoogleMapsAPI.Files.Test;
+package GoogleMapsAPI.Test;
 
-import GoogleMapsAPI.Files.ReusableMethods;
-import GoogleMapsAPI.Files.payload;
+import AppsPayloads.GoogleMapsAPIPayload;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utilities.ReusableMethods;
 
 public class ComplexJOSNParse {
 
@@ -14,7 +14,7 @@ public class ComplexJOSNParse {
     //4. Print All course titles and their respective Prices
     //5. Print no of copies sold by RPA Course
     //6. Verify if Sum of all Course prices matches with Purchase Amount
-    JsonPath jpath = ReusableMethods.rawToJSON(payload.coursePrice());
+    JsonPath jpath = ReusableMethods.rawToJSON(GoogleMapsAPIPayload.coursePrice());
 
     //1. Print No of courses returned by API
     @Test

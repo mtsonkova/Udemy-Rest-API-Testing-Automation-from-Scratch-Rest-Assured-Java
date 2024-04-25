@@ -1,12 +1,12 @@
-package GoogleMapsAPI.Files.Test;
+package GoogleMapsAPI.Test;
 
-import GoogleMapsAPI.Files.ReusableMethods;
-import GoogleMapsAPI.Files.payload;
+import AppsPayloads.GoogleMapsAPIPayload;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.ReusableMethods;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -30,7 +30,7 @@ public class GoogleMapsAPI {
     public void testAddNewLocation() {
         String response = given().queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
-                .body(payload.AddPlace())
+                .body(GoogleMapsAPIPayload.AddPlace())
                 .when().post("maps/api/place/add/json")
                 .then()
                 .assertThat().statusCode(200)
@@ -60,7 +60,7 @@ public class GoogleMapsAPI {
         given().log().all().queryParam("key", "qaclick123")
                 .queryParam("place_id", placeId)
                 .header("Content-Type", "application/json")
-                .body(payload.updatePlace(placeId))
+                .body(GoogleMapsAPIPayload.updatePlace(placeId))
                 .when().put("maps/api/place/update/json")
                 .then().assertThat().log().all().statusCode(200).body("msg", equalTo("Address successfully updated"));
 
@@ -80,7 +80,7 @@ public class GoogleMapsAPI {
 
         given().queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
-                .body(payload.deletePlace(placeId))
+                .body(GoogleMapsAPIPayload.deletePlace(placeId))
                 .when().post("/maps/api/place/delete/json")
                 .then().assertThat().log().all().statusCode(200);
     }

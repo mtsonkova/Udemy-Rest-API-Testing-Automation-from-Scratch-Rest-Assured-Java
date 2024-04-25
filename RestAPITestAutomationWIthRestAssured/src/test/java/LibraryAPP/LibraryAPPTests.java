@@ -1,14 +1,12 @@
 package LibraryAPP;
 
+import AppsPayloads.LibraryAppPayloads;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
-import jdk.jfr.ContentType;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
+import utilities.ReusableMethods;
 
 import static io.restassured.RestAssured.*;
 
@@ -30,7 +28,7 @@ public class LibraryAPPTests {
                 .when().post("Library/Addbook.php")
                 .then().log().all().assertThat().statusCode(200).extract().response().asString();
 
-        JsonPath jPath =ReusableMethods.rawToJSON(addBookResponse);
+        JsonPath jPath = ReusableMethods.rawToJSON(addBookResponse);
         String bookId = jPath.getString("ID");
         Assert.assertFalse(bookId.isEmpty());
 

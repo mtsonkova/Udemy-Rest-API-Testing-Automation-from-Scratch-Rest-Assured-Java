@@ -1,4 +1,4 @@
-package LibraryAPP;
+package AppsPayloads;
 
 public class LibraryAppPayloads {
     public static String addBook() {

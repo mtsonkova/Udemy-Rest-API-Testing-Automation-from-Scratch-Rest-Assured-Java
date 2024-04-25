@@ -1,6 +1,6 @@
-package GoogleMapsAPI.Files;
+package AppsPayloads;
 
-public class payload {
+public class GoogleMapsAPIPayload {
     public static String AddPlace() {
         return "{\n" +
                 "  \"location\": {\n" +
