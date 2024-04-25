@@ -1,4 +1,4 @@
-package Files;
+package GoogleMapsAPI.Files;
 
 public class payload {
     public static String AddPlace() {

@@ -1,7 +1,7 @@
-package Test;
+package GoogleMapsAPI.Files.Test;
 
-import Files.ReusableMethods;
-import Files.payload;
+import GoogleMapsAPI.Files.ReusableMethods;
+import GoogleMapsAPI.Files.payload;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
