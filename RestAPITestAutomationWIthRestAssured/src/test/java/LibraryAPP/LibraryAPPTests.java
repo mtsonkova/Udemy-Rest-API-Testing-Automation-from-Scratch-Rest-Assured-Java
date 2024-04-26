@@ -24,7 +24,7 @@ public class LibraryAPPTests {
     public void addBook() {
         String addBookResponse = given()
                 .header("Content-Type", "application/json")
-                .body(LibraryAppPayloads.addBook())
+                .body(LibraryAppPayloads.addBook("New Java Programming Book", "234", "aac", "Simon Par"))
                 .when().post("Library/Addbook.php")
                 .then().log().all().assertThat().statusCode(200).extract().response().asString();
 
@@ -60,11 +60,7 @@ public class LibraryAPPTests {
     public void deleteBook() {
         String deleteBookResponse = given()
                 .header("Content-Type", "application/json")
-                .body("{\n" +
-                        " \n" +
-                        "\"ID\" : \"abc132\"\n" +
-                        " \n" +
-                        "} \n")
+                .body(LibraryAppPayloads.deleteBook("abc132"))
                 .when().post("/Library/DeleteBook.php")
                 .then().log().all().assertThat().statusCode(200).extract().response().asString();
 

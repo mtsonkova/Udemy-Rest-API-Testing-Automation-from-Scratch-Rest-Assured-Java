@@ -1,13 +1,21 @@
 package AppsPayloads;
 
 public class LibraryAppPayloads {
-    public static String addBook() {
+    public static String addBook(String title, String isbn, String aisle, String author) {
         return "{\n" +
                 "\n" +
-                "\"name\":\"Learn Appium Automation with Java\",\n" +
-                "\"isbn\":\"abc\",\n" +
-                "\"aisle\":\"132\",\n" +
-                "\"author\":\"John foe\"\n" +
+                "\"name\":\"" + title + "\",\n" +
+                "\"isbn\":\"" + isbn + "\",\n" +
+                "\"aisle\":\"" + aisle + "\",\n" +
+                "\"author\":\"" + author + "\"\n" +
                 "}\n";
+    }
+
+    public static String deleteBook(String id) {
+        return"{\n" +
+                " \n" +
+                "\"ID\" : \"" + id + "\"\n" +
+                " \n" +
+                "} \n";
     }
 }
