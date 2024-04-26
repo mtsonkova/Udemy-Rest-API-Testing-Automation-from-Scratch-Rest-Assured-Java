@@ -8,12 +8,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utilities.ReusableMethods;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 
 public class GoogleMapsAPI {
 
+private String filePath = "/src/test/java/utilities/GoogleMapsPlaces.json";
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         RestAssured.baseURI = "https://rahulshettyacademy.com";
@@ -85,7 +90,27 @@ public class GoogleMapsAPI {
                 .then().assertThat().log().all().statusCode(200);
     }
 
+    @Test
+    public void addNewPlace() throws IOException {
+        String response = given().queryParam("key", "qaclick123")
+                .header("Content-Type", "application/json")
+                .body(ReusableMethods.readJsonAsString(filePath))
+                .when().post("maps/api/place/add/json")
+                .then()
+                .assertThat().statusCode(200)
+                .body("scope", equalTo("APP"))
+                .body("status", equalTo("OK"))
+                .header("Server", equalTo("Apache/2.4.52 (Ubuntu)"))
+                .extract().response().asString();
 
 
-    //Add place -> Update place with address -> Get place to validate if new address is presence in response.
+        JsonPath jsonPath = ReusableMethods.rawToJSON(response); // class that helps to parse JSON
+
+        String placeId = jsonPath.getString("place_id");
+
+        Assert.assertFalse(placeId.isEmpty());
+    }
+
+
+
 }
