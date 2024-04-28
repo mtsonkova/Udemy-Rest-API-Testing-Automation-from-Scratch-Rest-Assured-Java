@@ -2,6 +2,7 @@ package LibraryAPP;
 
 import AppsPayloads.LibraryAppPayloads;
 import io.restassured.RestAssured;
+import io.restassured.filter.session.SessionFilter;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
