@@ -23,4 +23,12 @@ public class FoodyAPIPayload {
                 "}\n";
     }
 
+    public static String createFood(String name, String description, String url) {
+        return "{\n" +
+                "\"name\": \"" + name + "\",\n" +
+                "\"description\": \"" + description + "\",\n" +
+                "\"url\": \"" +url +"  \"\n" +
+                "}\n";
+    }
+
 }
