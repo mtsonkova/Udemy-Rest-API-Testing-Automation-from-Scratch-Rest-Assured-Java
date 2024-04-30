@@ -17,6 +17,4 @@ public class ReusableMethods {
         String JSONAsString = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + path)));
         return JSONAsString;
     }
-
-
 }

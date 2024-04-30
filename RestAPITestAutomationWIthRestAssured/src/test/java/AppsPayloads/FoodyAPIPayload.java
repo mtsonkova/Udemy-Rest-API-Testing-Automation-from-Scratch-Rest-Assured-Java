@@ -31,4 +31,14 @@ public class FoodyAPIPayload {
                 "}\n";
     }
 
+    public static String changeTitleOfFood(String foodName) {
+        return "[\n" +
+                " {\n" +
+                "  \"path\": \"/name\",\n" +
+                "  \"op\": \"replace\",\n" +
+                "  \"value\": \"" + foodName + "\"\n" +
+                " }\n" +
+                "]\n";
+    }
+
 }
