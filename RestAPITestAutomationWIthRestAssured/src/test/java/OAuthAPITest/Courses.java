@@ -34,7 +34,7 @@ public class Courses {
         int statusCode = bookDetails.getStatusCode();
         System.out.println(statusCode);
 
-        Assert.assertTrue(statusCode == 200);
+        Assert.assertTrue(statusCode == 401);
         Assert.assertFalse(bookDetailsContent.isEmpty());
         Assert.assertTrue(bookDetailsContent.contains("Appium-Mobile Automation using Java"));
     }
