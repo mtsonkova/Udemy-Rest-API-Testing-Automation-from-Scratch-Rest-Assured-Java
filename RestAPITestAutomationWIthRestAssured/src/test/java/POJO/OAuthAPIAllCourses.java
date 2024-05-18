@@ -1,9 +1,9 @@
 package POJO;
 
-public class OAUThAPIAllCourses {
+public class OAuthAPIAllCourses {
     private String url;
     private String services;
-    private String experties;
+    private String expertise;
     private Courses courses;
     private String instructor;
     private String linkedIn;
@@ -24,12 +24,12 @@ public class OAUThAPIAllCourses {
         this.services = services;
     }
 
-    public String getExperties() {
-        return experties;
+    public String getExpertise() {
+        return expertise;
     }
 
-    public void setExperties(String experties) {
-        this.experties = experties;
+    public void setExpertise(String expertise) {
+        this.expertise = expertise;
     }
 
     public Courses getCourses() {
