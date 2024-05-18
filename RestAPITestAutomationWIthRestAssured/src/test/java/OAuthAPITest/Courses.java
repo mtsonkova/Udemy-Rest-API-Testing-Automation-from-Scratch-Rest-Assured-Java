@@ -2,6 +2,7 @@ package OAuthAPITest;
 
 import POJO.Api;
 import POJO.OAuthAPIAllCourses;
+import POJO.WebAutomation;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -70,5 +71,33 @@ public class Courses {
      }
         System.out.println(coursePrice);
      Assert.assertTrue(coursePrice > 0);
+    }
+
+
+    @Test
+    public void getAllCoursesFromWebAutomation() {
+        Response response = given()
+                .formParam( "client_id", "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com")
+                .formParam(" client_secret", "erZOWM9g3UtwNRj340YYaK_W")
+                .formParam("grant_type", "client_credentials")
+                .formParam("scope", "trust")
+                .when().post("https://rahulshettyacademy.com/oauthapi/oauth2/resourceOwner/token");
+
+        String accessToken = response.getBody().jsonPath().getString("access_token");
+
+        // get courses details
+        String[] expectedCourseTitles = {"Selenium Webdriver Java", "Cypress", "Protractor"};
+
+        OAuthAPIAllCourses allCoursesResponse = given()
+                .queryParam("access_token", accessToken)
+                .when()
+                .get("https://rahulshettyacademy.com/oauthapi/getCourseDetails").as(OAuthAPIAllCourses.class);
+
+        List<WebAutomation> webAutomationsCourses = allCoursesResponse.getCourses().getWebAutomation();
+
+        for(int i = 0; i < webAutomationsCourses.size(); i++) {
+            String currentTitle = webAutomationsCourses.get(i).getCourseTitle();
+           Assert.assertEquals(currentTitle, expectedCourseTitles[i]);
+        }
     }
 }
