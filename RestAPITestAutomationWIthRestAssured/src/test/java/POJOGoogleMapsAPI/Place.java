@@ -4,8 +4,21 @@ import java.util.List;
 
 public class Place {
     private Location location;
-    private String accuracy;
+    private int accuracy;
     private String name;
+    private String phoneNumber;
+    private String address;
+    private List<String> types;
+    private String website;
+    private String language;
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
+    }
 
     public Location getLocation() {
         return location;
@@ -15,11 +28,11 @@ public class Place {
         this.location = location;
     }
 
-    public String getAccuracy() {
+    public int getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(String accuracy) {
+    public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
 
@@ -47,14 +60,6 @@ public class Place {
         this.address = address;
     }
 
-    public List<Type> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<Type> types) {
-        this.types = types;
-    }
-
     public String getWebsite() {
         return website;
     }
@@ -71,10 +76,6 @@ public class Place {
         this.language = language;
     }
 
-    private String phoneNumber;
-    private String address;
-    private List<Type> types;
-    private String website;
-    private String language;
+
 
 }
